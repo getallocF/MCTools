@@ -62,4 +62,4 @@ Local archive and image utilities process selected files in the browser. The ser
 
 ## Credits
 
-Made by MCTools. Creator credit: [TikTok @fariznomercy](https://www.tiktok.com/@fariznomercy).
+Made by MCTools. Creator credit: [TikTok @fariznomercy](https://www.tiktok.com/@risparis00).
