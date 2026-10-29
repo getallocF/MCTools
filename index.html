@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b100f">
+  <meta name="description" content="MCTools — a local-first toolkit for Minecraft Bedrock packs, glyphs, manifests, JSON and UUIDs.">
+  <title>MCTools — Bedrock Toolkit</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script type="importmap">
+    {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js"}}
+  </script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#home" data-view="home" aria-label="MCTools home">
+        <span class="brand-mark"><span></span><span></span><span></span><span></span></span>
+        <span class="brand-type"><b>MCTOOLS</b><small>BEDROCK TOOLS <i>v1.1</i></small></span>
+      </a>
+      <div class="side-caption">WORKSPACE</div>
+      <nav class="nav-list" aria-label="Main navigation">
+        <button class="nav-item active" data-view="home"><span class="nav-ic">⌂</span><span>Overview</span><span class="nav-end">01</span></button>
+        <button class="nav-item" data-view="encrypt"><span class="nav-ic">◈</span><span>Pack exporter</span></button>
+        <button class="nav-item" data-view="decrypt"><span class="nav-ic">⌑</span><span>Decrypt my pack</span></button>
+        <button class="nav-item" data-view="server"><span class="nav-ic">↗</span><span>Server pack fetch</span><span class="external-dot"></span></button>
+        <div class="nav-divider"></div>
+        <div class="side-caption compact">CREATION TOOLS</div>
+        <button class="nav-item" data-view="glyph"><span class="nav-ic glyph-ic">Aᵦ</span><span>Glyph generator</span></button>
+        <button class="nav-item" data-view="json"><span class="nav-ic">{ }</span><span>JSON maker</span></button>
+        <button class="nav-item" data-view="uuid"><span class="nav-ic">⟡</span><span>UUID generator</span></button>
+        <button class="nav-item" data-view="manifest"><span class="nav-ic">▤</span><span>Manifest maker</span></button>
+        <button class="nav-item" data-view="inspector"><span class="nav-ic">⌕</span><span>Pack inspector</span></button>
+        <button class="nav-item" data-view="icon"><span class="nav-ic">▧</span><span>Pack icon maker</span></button>
+        <button class="nav-item" data-view="text"><span class="nav-ic">§</span><span>Text formatter</span></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="local-status"><span class="status-dot"></span><span><b>LOCAL WORKSPACE</b><small>Files stay on this device</small></span></div>
+        <div class="profile-row">
+          <div class="profile-avatar">M</div>
+          <div class="profile-info"><b>MCTools</b><small>Minecraft toolset</small><small class="credit-small">TikTok · @fariznomercy</small></div>
+          <span class="profile-menu">···</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <button id="mobileMenu" class="mobile-menu" aria-label="Open menu">☰</button>
+        <div class="crumbs"><span>MCTOOLS</span><span class="crumb-slash">/</span><b id="crumbCurrent">OVERVIEW</b></div>
+        <div class="topbar-right"><span class="top-pill"><span class="status-dot"></span> Browser-side tools</span><button class="top-link top-link-button" data-jump="server">Server fetch in MCTools <span>↘</span></button></div>
+      </header>
+
+      <section class="view active-view" id="view-home">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <div class="eyebrow"><span class="eyebrow-line"></span> TOOLS FOR BEDROCK CREATORS</div>
+            <h1>Build packs.<br><span>Keep control.</span></h1>
+            <p class="hero-description">A pixel-first toolkit for Minecraft Bedrock creators. Package packs, build rank glyphs, validate manifests, and keep everyday utilities in one place.</p>
+            <div class="hero-actions"><button class="btn btn-primary" data-jump="encrypt">Open pack tools <span>↗</span></button><button class="btn btn-quiet" data-jump="glyph">Make a rank glyph <span>→</span></button></div>
+            <div class="hero-footnote"><span class="tiny-lock">⌑</span> No account. Local processing. Your files stay yours.</div>
+          </div>
+          <div class="hero-art">
+            <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+            <div class="art-grid"></div>
+            <div class="hero-code-card"><span class="card-top-label">PLAYER MODEL / 01</span><span class="live-tag"><i></i> PREVIEW</span><div id="skinStage" class="skin-stage"><img src="assets/Mason_customSlim.png" alt="Your Minecraft skin texture" class="skin-fallback"></div><div class="skin-caption"><div><b>MASON_CUSTOMSLIM</b><small>64 × 64 · SKIN TEXTURE</small></div><span class="spin-indicator">↻</span></div></div>
+            <div class="floating-chip chip-left"><span class="chip-icon">✳</span><span><b>Glyph-ready</b><small>Unicode atlas</small></span></div>
+            <div class="floating-chip chip-right"><span class="chip-lock">⌑</span><span><b>Local-first</b><small>Private by design</small></span></div>
+            <div class="art-label art-label-top">FIG. 01 / CREATOR DESK</div><div class="art-label art-label-bottom">X: 08.14 · Y: 64.00 · Z: 03.21</div>
+          </div>
+        </div>
+
+        <div class="section-heading"><div><div class="eyebrow">YOUR WORKBENCH</div><h2>Pick a tool.</h2></div><span class="section-note">10 utilities <span>·</span> one workspace</span></div>
+        <div class="tool-grid">
+          <button class="tool-card featured" data-jump="encrypt"><span class="tool-card-index">01 / PACK</span><span class="tool-icon icon-lock">▤</span><span class="tool-title">Pack exporter</span><span class="tool-desc">Build an official .mcpack, .mcaddon, or ZIP package.</span><span class="tool-arrow">↗</span></button>
+          <button class="tool-card" data-jump="decrypt"><span class="tool-card-index">02 / PACK</span><span class="tool-icon">⌑</span><span class="tool-title">Decrypt my pack</span><span class="tool-desc">Restore compatible legacy password containers.</span><span class="tool-arrow">↗</span></button>
+          <button class="tool-card" data-jump="glyph"><span class="tool-card-index">03 / FONT</span><span class="tool-icon icon-glyph">Aᵦ</span><span class="tool-title">Glyph generator</span><span class="tool-desc">Turn rank icon sheets into Unicode glyphs.</span><span class="tool-arrow">↗</span></button>
+          <button class="tool-card" data-jump="json"><span class="tool-card-index">04 / DATA</span><span class="tool-icon">{ }</span><span class="tool-title">JSON maker</span><span class="tool-desc">Format, minify, validate and export JSON.</span><span class="tool-arrow">↗</span></button>
+          <button class="tool-card" data-jump="uuid"><span class="tool-card-index">05 / ID</span><span class="tool-icon">⟡</span><span class="tool-title">UUID generator</span><span class="tool-desc">Generate random v4 identifiers in batches.</span><span class="tool-arrow">↗</span></button>
+          <button class="tool-card" data-jump="manifest"><span class="tool-card-index">06 / PACK</span><span class="tool-icon">▤</span><span class="tool-title">Manifest maker</span><span class="tool-desc">Build a manifest with distinct pack and module IDs.</span><span class="tool-arrow">↗</span></button>
+          <button class="tool-card" data-jump="inspector"><span class="tool-card-index">07 / AUDIT</span><span class="tool-icon">⌕</span><span class="tool-title">Pack inspector</span><span class="tool-desc">Read manifest data and browse archive contents.</span><span class="tool-arrow">↗</span></button>
+          <button class="tool-card" data-jump="server"><span class="tool-card-index">08 / NETWORK</span><span class="tool-icon">↗</span><span class="tool-title">Server pack fetch</span><span class="tool-desc">Use the downloader in an embedded workspace.</span><span class="tool-arrow">↗</span></button>
+          <button class="tool-card" data-jump="icon"><span class="tool-card-index">09 / IMAGE</span><span class="tool-icon">▧</span><span class="tool-title">Pack icon maker</span><span class="tool-desc">Crop, fit and export a 256×256 pack_icon.png.</span><span class="tool-arrow">↗</span></button>
+          <button class="tool-card" data-jump="text"><span class="tool-card-index">10 / TEXT</span><span class="tool-icon">§</span><span class="tool-title">Text formatter</span><span class="tool-desc">Build Bedrock color-code text and tellraw commands.</span><span class="tool-arrow">↗</span></button>
+        </div>
+        <div class="bottom-note"><span class="note-mark">✳</span><div><b>Made for the details.</b><p>Small tools that fit naturally into your Bedrock workflow — without an account, a dashboard full of noise, or unnecessary setup.</p></div><span class="note-stamp">MC / TOOLS</span></div>
+      </section>
+
+      <section class="view" id="view-encrypt">
+        <div class="page-intro"><div><div class="eyebrow"><span class="eyebrow-line"></span> PACK WORKFLOW / 01</div><h1>Pack exporter<span class="title-dot">.</span></h1><p>Export ZIP-based Bedrock packs into the official .mcpack or .mcaddon package extensions.</p></div><div class="intro-mark">▤</div></div>
+        <div class="notice notice-warning"><span>i</span><div><b>Official format, honest behavior</b><p><code>.mcpack</code> and <code>.mcaddon</code> are ZIP-based import formats, not encryption formats. This tool packages or renames compatible archives locally; it does not add password protection or bypass server-side encryption. See <a href="https://learn.microsoft.com/en-us/minecraft/creator/documents/minecraftfileextensions?view=minecraft-bedrock-stable" target="_blank" rel="noreferrer">Microsoft's file extension reference</a>.</p></div></div>
+        <div class="work-grid">
+          <div class="panel panel-main"><div class="panel-heading"><div><span class="step-no">01</span><h2>Choose a pack archive</h2></div><span class="private-label"><span class="status-dot"></span> STAYS LOCAL</span></div>
+            <label class="dropzone" id="encryptDrop"><input type="file" id="encryptFile" accept=".zip,.mcpack,.mcaddon,application/zip,application/x-zip-compressed"><span class="drop-symbol">↑</span><b id="encryptFileTitle">Drop a ZIP, MCPACK or MCADDON</b><small id="encryptFileMeta">The file is processed in your browser. Nothing is uploaded.</small><span class="drop-browse">Browse files <span>↗</span></span></label>
+            <div class="field-block"><label for="packOutputFormat">Output format</label><select id="packOutputFormat" class="tool-select"><option value="mcpack">.mcpack · single resource/behavior pack</option><option value="mcaddon">.mcaddon · bundle one or more packs</option><option value="zip">.zip · standard archive</option></select><div class="field-hint">For .mcpack, manifest.json should be at the archive root. .mcaddon should contain one or more .mcpack/.mcworld files.</div></div>
+            <div class="process-row"><div><span class="process-icon">▤</span><div><b>Official extension</b><small>Bedrock import package</small></div></div><div><span class="process-icon">⌂</span><div><b>Local processing</b><small>No upload required</small></div></div></div>
+            <button class="btn btn-primary btn-wide" id="runEncrypt" disabled>Export package <span>↗</span></button><div class="result-area" id="encryptResult" aria-live="polite"></div>
+          </div>
+          <aside class="panel side-panel"><div class="side-panel-top"><span class="eyebrow">FORMAT GUIDE</span><div class="side-illustration">▤</div><h3>Package, don't encrypt.</h3><p>Minecraft Bedrock's documented import extensions are ZIP-based. A filename change alone cannot repair an invalid pack structure, so check the manifest and inner files before importing.</p></div><div class="check-list"><div><span>01</span><p>Upload a ZIP-based archive.</p></div><div><span>02</span><p>Choose the intended Bedrock format.</p></div><div><span>03</span><p>Export and inspect the downloaded package.</p></div></div><div class="side-foot"><span class="status-dot"></span> No file leaves this device.</div></aside>
+        </div>
+      </section>
+
+      <section class="view" id="view-decrypt">
+        <div class="page-intro"><div><div class="eyebrow"><span class="eyebrow-line"></span> PACK WORKFLOW / 02</div><h1>Decrypt my pack<span class="title-dot">.</span></h1><p>Restore a legacy MCTools password-protected container using its original key.</p></div><div class="intro-mark">⌑</div></div>
+        <div class="work-grid">
+          <div class="panel panel-main"><div class="panel-heading"><div><span class="step-no">01</span><h2>Open encrypted container</h2></div><span class="private-label"><span class="status-dot"></span> STAYS LOCAL</span></div>
+            <label class="dropzone" id="decryptDrop"><input type="file" id="decryptFile" accept=".fnpack,.fnp,.bin,application/octet-stream"><span class="drop-symbol">↓</span><b id="decryptFileTitle">Drop a legacy .fnpack file here</b><small id="decryptFileMeta">Legacy .fnpack files from the original MCTools-compatible container format.</small><span class="drop-browse">Browse files <span>↗</span></span></label>
+            <div class="field-block"><label for="decryptKey">Decryption key</label><div class="field-with-action"><input id="decryptKey" type="password" autocomplete="off" placeholder="Paste the key used to encrypt this file"><button class="mini-action" id="toggleDecryptKey">Show</button></div><div class="field-hint">The key stays in your browser. Wrong keys fail verification without producing a partial archive.</div></div>
+            <div class="decrypt-summary" id="decryptSummary"><span class="summary-file-icon">⌑</span><span><b>No file selected</b><small>Waiting for an encrypted container</small></span><span class="summary-status">IDLE</span></div>
+            <button class="btn btn-primary btn-wide" id="runDecrypt" disabled>Decrypt archive <span>↗</span></button><div class="result-area" id="decryptResult" aria-live="polite"></div>
+          </div>
+          <aside class="panel side-panel"><div class="side-panel-top"><span class="eyebrow">RESTORE FLOW</span><div class="side-illustration unlock">⌑</div><h3>Back to the source.</h3><p>Successful verification restores the exact original bytes, including the original filename and extension.</p></div><div class="check-list"><div><span>01</span><p>Select a compatible legacy <code>.fnpack</code> file.</p></div><div><span>02</span><p>Enter the matching key.</p></div><div><span>03</span><p>Save the restored ZIP or MCPACK.</p></div></div><div class="side-foot"><span class="status-dot"></span> The file is handled in your browser.</div></aside>
+        </div>
+      </section>
+
+      <section class="view" id="view-glyph">
+        <div class="page-intro"><div><div class="eyebrow"><span class="eyebrow-line"></span> CREATION TOOLS / 01</div><h1>Glyph generator<span class="title-dot">.</span></h1><p>Bring your rank icons into a bitmap-font atlas and assign private-use Unicode characters.</p></div><div class="intro-mark glyph-large">Aᵦ</div></div>
+        <div class="glyph-layout">
+          <div class="panel glyph-source-panel"><div class="panel-heading"><div><span class="step-no">01</span><h2>Bitmap source</h2></div><span class="muted-small">PNG recommended</span></div>
+            <label class="dropzone dropzone-compact" id="glyphDrop"><input type="file" id="glyphFile" accept="image/png,image/webp,image/jpeg"><span class="drop-symbol">↑</span><b id="glyphFileTitle">Upload your rank sheet</b><small id="glyphFileMeta">A grid of icons, or a single glyph image.</small><span class="drop-browse">Browse image <span>↗</span></span></label>
+            <div class="glyph-preview-wrap"><div class="preview-header"><span>ATLAS PREVIEW</span><span id="glyphDimensions">NO IMAGE</span></div><div class="glyph-preview" id="glyphPreview"><div class="preview-empty"><span>▧</span><b>Your image appears here</b><small>Grid cells are outlined after upload.</small></div><canvas id="glyphCanvas" hidden></canvas></div></div>
+            <div class="form-grid two-col"><div class="field-block"><label for="glyphCellW">Cell width</label><input type="number" id="glyphCellW" min="1" max="512" value="8"></div><div class="field-block"><label for="glyphCellH">Cell height</label><input type="number" id="glyphCellH" min="1" max="512" value="8"></div><div class="field-block"><label for="glyphStart">First Unicode</label><input type="text" id="glyphStart" value="E000" spellcheck="false"></div><div class="field-block"><label for="glyphHeight">Font height</label><input type="number" id="glyphHeight" min="1" max="64" value="8"></div></div>
+            <div class="field-block"><label for="glyphFilePath">Texture path in pack</label><input type="text" id="glyphFilePath" value="font/glyphs/ranks.png" spellcheck="false"><div class="field-hint">Use the path expected by your Bedrock font setup. Copy the image into the matching resource-pack location.</div></div>
+            <button class="btn btn-primary btn-wide" id="generateGlyphs" disabled>Generate Unicode map <span>↗</span></button>
+          </div>
+          <div class="panel glyph-result-panel"><div class="panel-heading"><div><span class="step-no">02</span><h2>Glyph output</h2></div><span class="private-label"><span class="status-dot"></span> LIVE PREVIEW</span></div>
+            <div class="glyph-stats"><div><small>GLYPHS</small><b id="glyphCount">—</b></div><div><small>GRID</small><b id="glyphGrid">— × —</b></div><div><small>UNICODE RANGE</small><b id="glyphRange">—</b></div></div>
+            <div class="unicode-block"><div class="output-top"><label>All Unicode characters</label><button class="text-action" id="copyAllUnicode" disabled>Copy all <span>⧉</span></button></div><textarea id="glyphUnicode" readonly placeholder="Your Unicode characters will appear here…" rows="4"></textarea><div class="unicode-foot"><span><i class="status-dot"></i> Private-use area recommended</span><span id="glyphCharCount">0 chars</span></div></div>
+            <div class="unicode-block provider-block"><div class="output-top"><label>Bitmap provider JSON</label><div class="output-actions"><button class="text-action" id="copyProvider" disabled>Copy JSON <span>⧉</span></button><button class="text-action" id="downloadProvider" disabled>Download <span>↓</span></button></div></div><textarea id="glyphProvider" readonly placeholder="Provider JSON is generated here…" rows="11" spellcheck="false"></textarea></div>
+            <div class="notice notice-soft"><span>i</span><p>The provider JSON maps each cell from left to right, then top to bottom. Keep the atlas dimensions and the cell size aligned with your texture.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="view-json">
+        <div class="page-intro"><div><div class="eyebrow"><span class="eyebrow-line"></span> CREATION TOOLS / 02</div><h1>JSON maker<span class="title-dot">.</span></h1><p>Format, minify and validate JSON snippets without losing your place.</p></div><div class="intro-mark json-large">{ }</div></div>
+        <div class="panel json-panel"><div class="json-toolbar"><div class="template-picker"><label for="jsonTemplate">START FROM</label><select id="jsonTemplate"><option value="blank">Blank object</option><option value="manifest">Bedrock manifest</option><option value="font">Bitmap font provider</option><option value="item">Custom item component</option><option value="recipe">Shaped recipe</option><option value="loot">Loot table</option></select></div><div class="json-actions"><span id="jsonStatus" class="json-status">READY</span><button class="mini-action" id="jsonFormat">Format</button><button class="mini-action" id="jsonMinify">Minify</button><button class="mini-action" id="jsonValidate">Validate</button></div></div>
+          <div class="editor-wrap"><div class="editor-gutter" id="jsonGutter">1</div><textarea id="jsonInput" spellcheck="false" aria-label="JSON editor">{
+  "example": true,
+  "note": "Replace this with your Bedrock JSON"
+}</textarea></div>
+          <div class="json-bottom"><div class="json-bottom-meta"><span class="status-dot"></span><span id="jsonMessage">Ready for editing</span><span id="jsonLineCount">3 lines</span></div><div class="json-actions"><button class="btn btn-secondary" id="jsonCopy">Copy JSON <span>⧉</span></button><button class="btn btn-primary" id="jsonDownload">Download .json <span>↓</span></button></div></div>
+        </div>
+        <div class="micro-tip"><span>✳</span><p><b>Quick tip</b> — pick a template to start with a useful structure, then validate before adding it to a pack.</p></div>
+      </section>
+
+      <section class="view" id="view-uuid">
+        <div class="page-intro"><div><div class="eyebrow"><span class="eyebrow-line"></span> CREATION TOOLS / 03</div><h1>UUID generator<span class="title-dot">.</span></h1><p>Fresh version 4 identifiers for pack headers, modules, and dependencies.</p></div><div class="intro-mark uuid-large">⟡</div></div>
+        <div class="uuid-layout"><div class="panel uuid-settings"><div class="panel-heading"><div><span class="step-no">01</span><h2>Generate IDs</h2></div><span class="muted-small">RFC 4122 / v4</span></div><div class="field-block"><label for="uuidCount">Number of UUIDs</label><div class="range-row"><input type="range" id="uuidCountRange" min="1" max="50" value="5"><input type="number" id="uuidCount" min="1" max="50" value="5"></div><div class="range-labels"><span>1 ID</span><span>50 IDs</span></div></div><div class="uuid-format"><span class="format-mark">⟡</span><div><b>Version 4 · Random</b><p>Generated with the browser cryptographically secure random number generator.</p></div></div><button class="btn btn-primary btn-wide" id="runUUID">Generate UUIDs <span>↗</span></button></div>
+          <div class="panel uuid-output-panel"><div class="panel-heading"><div><span class="step-no">02</span><h2>Your identifiers</h2></div><div class="output-actions"><button class="text-action" id="copyUUIDs" disabled>Copy all ⧉</button><button class="text-action" id="downloadUUIDs" disabled>Export ↓</button></div></div><div id="uuidOutput" class="uuid-output"><div class="empty-output"><span>⟡</span><b>Ready to generate</b><small>Choose a quantity and create your IDs.</small></div></div><div class="output-foot"><span id="uuidOutputCount">0 identifiers</span><span>Duplicates are not intentionally reused.</span></div></div></div>
+        <div class="notice notice-soft"><span>i</span><p>Keep the UUID in a manifest stable after publishing a pack. Changing it can make Minecraft treat the pack as a different pack.</p></div>
+      </section>
+
+      <section class="view" id="view-manifest">
+        <div class="page-intro"><div><div class="eyebrow"><span class="eyebrow-line"></span> CREATION TOOLS / 04</div><h1>Manifest maker<span class="title-dot">.</span></h1><p>Create a Bedrock manifest with fresh UUIDs and editable version fields.</p></div><div class="intro-mark">▤</div></div>
+        <div class="manifest-layout"><div class="panel manifest-form"><div class="panel-heading"><div><span class="step-no">01</span><h2>Pack details</h2></div><span class="muted-small">BEDROCK EDITION</span></div>
+          <div class="field-block"><label for="manifestType">Pack type</label><div class="segmented" id="manifestType"><button class="selected" data-type="resources">Resource pack</button><button data-type="data">Behavior pack</button></div></div>
+          <div class="field-block"><label for="manifestName">Display name</label><input id="manifestName" value="My Resource Pack" maxlength="80"></div><div class="field-block"><label for="manifestDescription">Description</label><textarea id="manifestDescription" rows="3" maxlength="256">Created with MCTools.</textarea></div>
+          <div class="form-grid two-col"><div class="field-block"><label for="manifestVersion">Pack version</label><input id="manifestVersion" value="1.0.0" placeholder="1.0.0"></div><div class="field-block"><label for="manifestMinEngine">Minimum engine</label><input id="manifestMinEngine" value="1.20.0" placeholder="1.20.0"></div></div>
+          <div class="field-block"><label>Header UUID <button class="inline-refresh" id="refreshHeaderUUID" title="Regenerate header UUID">↻</button></label><div class="uuid-field"><input id="manifestHeaderUUID" readonly><button class="mini-action" data-copy-input="manifestHeaderUUID">Copy</button></div></div>
+          <div class="field-block"><label>Module UUID <button class="inline-refresh" id="refreshModuleUUID" title="Regenerate module UUID">↻</button></label><div class="uuid-field"><input id="manifestModuleUUID" readonly><button class="mini-action" data-copy-input="manifestModuleUUID">Copy</button></div></div>
+          <button class="btn btn-primary btn-wide" id="buildManifest">Build manifest.json <span>↗</span></button>
+        </div>
+        <div class="panel manifest-output"><div class="panel-heading"><div><span class="step-no">02</span><h2>Manifest preview</h2></div><div class="output-actions"><button class="text-action" id="copyManifest">Copy JSON ⧉</button><button class="text-action" id="downloadManifest">Download ↓</button></div></div><div class="manifest-preview-head"><span class="manifest-file-icon">{ }</span><div><b id="manifestPreviewName">My Resource Pack</b><small id="manifestPreviewType">RESOURCE PACK · FORMAT VERSION 2</small></div><span class="manifest-valid"><i></i> VALID SHAPE</span></div><textarea id="manifestOutput" spellcheck="false" readonly rows="20"></textarea><div class="notice notice-soft manifest-note"><span>i</span><p>Review <code>min_engine_version</code> and module type for your target Minecraft version before distributing.</p></div></div></div>
+      </section>
+
+      <section class="view" id="view-inspector">
+        <div class="page-intro"><div><div class="eyebrow"><span class="eyebrow-line"></span> AUDIT TOOLS / 01</div><h1>Pack inspector<span class="title-dot">.</span></h1><p>Peek inside a ZIP or MCPACK, check its manifest and see what files are included.</p></div><div class="intro-mark">⌕</div></div>
+        <div class="panel inspector-panel"><div class="panel-heading"><div><span class="step-no">01</span><h2>Scan an archive</h2></div><span class="private-label"><span class="status-dot"></span> LOCAL SCAN</span></div><label class="dropzone dropzone-compact" id="inspectDrop"><input type="file" id="inspectFile" accept=".zip,.mcpack,.mcaddon,application/zip"><span class="drop-symbol">⌕</span><b id="inspectFileTitle">Choose a pack to inspect</b><small id="inspectFileMeta">The archive is read in your browser only.</small><span class="drop-browse">Browse archive <span>↗</span></span></label><div class="inspector-results" id="inspectorResults"><div class="empty-output"><span>▤</span><b>No archive loaded</b><small>Manifest details and file list will appear here.</small></div></div></div>
+      </section>
+
+      <section class="view" id="view-server">
+        <div class="page-intro"><div><div class="eyebrow"><span class="eyebrow-line"></span> NETWORK TOOLS / 01</div><h1>Server pack fetch<span class="title-dot">.</span></h1><p>The downloader is embedded here so you can work from the MCTools workspace.</p></div><div class="intro-mark">↗</div></div>
+        <div class="notice notice-soft server-embed-note"><span>i</span><div><b>Embedded service</b><p>The panel below loads DecryptMyPack inside this page. Its server connection and pack-processing backend remain operated by that service. MCTools does not copy or proxy a private API; if the provider blocks framing, an official API or provider permission is needed for deeper integration.</p></div></div>
+        <div class="server-embed-shell panel"><div class="server-embed-bar"><span><i class="server-embed-dot"></i><b>decryptmypack.com</b><small>Embedded downloader</small></span><span class="server-embed-security">REMOTE SERVICE · IN-FRAME</span></div><iframe id="serverFetchFrame" class="server-fetch-frame" src="https://decryptmypack.com/" title="DecryptMyPack Bedrock server pack downloader" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="clipboard-read; clipboard-write; fullscreen" allowfullscreen></iframe></div>
+        <div class="server-embed-footer"><span>Having trouble loading the panel?</span><p>Some websites disallow embedding through browser security headers. MCTools cannot override that restriction. The rest of the tools continue to work locally.</p></div>
+      </section>
+
+      <section class="view" id="view-icon">
+        <div class="page-intro"><div><div class="eyebrow"><span class="eyebrow-line"></span> IMAGE TOOLS / 01</div><h1>Pack icon maker<span class="title-dot">.</span></h1><p>Prepare a crisp 256 × 256 PNG for the root of your Bedrock pack.</p></div><div class="intro-mark">▧</div></div>
+        <div class="icon-maker-layout"><div class="panel icon-maker-controls"><div class="panel-heading"><div><span class="step-no">01</span><h2>Source image</h2></div><span class="private-label"><span class="status-dot"></span> LOCAL</span></div>
+          <label class="dropzone dropzone-compact" id="iconDrop"><input type="file" id="iconFile" accept="image/png,image/jpeg,image/webp,image/gif"><span class="drop-symbol">↑</span><b id="iconFileTitle">Upload a pack image</b><small id="iconFileMeta">PNG, JPG or WEBP · square images recommended</small><span class="drop-browse">Browse image <span>↗</span></span></label>
+          <div class="field-block"><label for="iconFit">Fit mode</label><select id="iconFit" class="tool-select"><option value="cover">Fill square (crop edges)</option><option value="contain">Fit inside (preserve all)</option><option value="stretch">Stretch to square</option></select></div>
+          <div class="field-block"><label for="iconBg">Background</label><div class="color-field"><input type="color" id="iconBg" value="#101710"><span>Used when the image does not cover the full square.</span></div></div>
+          <div class="field-block"><label for="iconPixelation">Pixel effect <span class="label-optional">· <span id="iconPixelLabel">1×</span></span></label><input type="range" id="iconPixelation" min="1" max="12" value="1"></div>
+          <button class="btn btn-primary btn-wide" id="downloadPackIcon" disabled>Download pack_icon.png <span>↓</span></button>
+        </div>
+        <div class="panel icon-maker-preview"><div class="panel-heading"><div><span class="step-no">02</span><h2>256 × 256 preview</h2></div><span class="muted-small">PNG · SQUARE</span></div><div class="icon-canvas-stage"><canvas id="iconCanvas" width="256" height="256" aria-label="Pack icon preview"></canvas><div class="icon-checker-label">PACK ICON / 256PX</div></div><div class="notice notice-soft"><span>i</span><p>Save the output as <code>pack_icon.png</code> in the root of the resource or behavior pack. Minecraft uses the filename to identify the pack thumbnail.</p></div></div></div>
+      </section>
+
+      <section class="view" id="view-text">
+        <div class="page-intro"><div><div class="eyebrow"><span class="eyebrow-line"></span> TEXT TOOLS / 01</div><h1>Text formatter<span class="title-dot">.</span></h1><p>Build Bedrock section-sign formatting and copy-ready tellraw or title commands.</p></div><div class="intro-mark">§</div></div>
+        <div class="text-tool-layout"><div class="panel text-tool-controls"><div class="panel-heading"><div><span class="step-no">01</span><h2>Text settings</h2></div><span class="muted-small">BEDROCK TEXT</span></div>
+          <div class="field-block"><label for="mcTextInput">Your text</label><textarea id="mcTextInput" rows="5" maxlength="2000" placeholder="Type your rank, server message or title…">MCTools</textarea></div>
+          <div class="field-block"><label for="mcTextColor">Color</label><select id="mcTextColor" class="tool-select"><option value="§f">White</option><option value="§0">Black</option><option value="§1">Dark blue</option><option value="§2">Dark green</option><option value="§3">Dark aqua</option><option value="§4">Dark red</option><option value="§5">Dark purple</option><option value="§6">Gold</option><option value="§7">Gray</option><option value="§8">Dark gray</option><option value="§9">Blue</option><option value="§a">Green</option><option value="§b">Aqua</option><option value="§c">Red</option><option value="§d">Light purple</option><option value="§e">Yellow</option></select></div>
+          <div class="format-toggle-grid"><label><input type="checkbox" id="mcBold"><span>Bold</span></label><label><input type="checkbox" id="mcItalic"><span>Italic</span></label><label><input type="checkbox" id="mcUnderline"><span>Underline</span></label><label><input type="checkbox" id="mcStrike"><span>Strikethrough</span></label></div>
+          <div class="field-block"><label for="mcTextMode">Output type</label><select id="mcTextMode" class="tool-select"><option value="section">Section-sign text</option><option value="tellraw">tellraw command</option><option value="title">Title command</option><option value="subtitle">Subtitle command</option></select></div>
+        </div><div class="panel text-tool-output"><div class="panel-heading"><div><span class="step-no">02</span><h2>Live preview & output</h2></div><div class="output-actions"><button class="text-action" id="copyMcText">Copy output ⧉</button><button class="text-action" id="downloadMcText">Download .txt ↓</button></div></div><div class="formatted-preview-wrap"><span>IN-GAME PREVIEW</span><div id="mcTextPreview" class="formatted-preview">MCTools</div></div><div class="field-block"><label for="mcTextOutput">Generated output</label><textarea id="mcTextOutput" rows="9" readonly spellcheck="false"></textarea></div><div class="notice notice-soft"><span>i</span><p>Formatting codes use <code>§</code>. Some command contexts or plugins have different formatting support, so test the output in your target Bedrock version or server.</p></div></div></div>
+      </section>
+
+      <footer class="app-footer"><span>MCTOOLS <span class="footer-dot">•</span> BEDROCK TOOLKIT</span><span>Made for Bedrock creators. <a class="creator-credit" href="https://www.tiktok.com/@fariznomercy" target="_blank" rel="noreferrer">TikTok · @fariznomercy</a></span></footer>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"><span class="toast-mark">✓</span><span id="toastText">Copied to clipboard</span></div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
